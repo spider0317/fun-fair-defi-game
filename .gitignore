@@ -1,0 +1,14 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+
+#Dependencies
+node_modules
+
+
+#Production
+build
+.cache
+
+
+#Single file
+.secret

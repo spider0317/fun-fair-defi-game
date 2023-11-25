@@ -1,0 +1,46 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#root {
+    background-image: url(../media/background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+    color: #65748F;
+}
+
+/* HELPERS */
+
+.light {
+    font-weight: 300;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.margin-bottom {
+    margin-bottom: 16px;
+}
+
+/* OVERRIDES */
+
+.ant-divider {
+    background-color: #BDCAE1;
+}
+
+.ant-btn-primary {
+    color: #65748F;
+    background-color: #C5DEE0;
+    border-color: #C5DEE0;
+    font-size: 107%;
+}

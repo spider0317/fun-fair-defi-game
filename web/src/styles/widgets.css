@@ -1,0 +1,10 @@
+.card {
+    background-color: #ffffffe5;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 5vh;
+    max-height: 90vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-shadow: 0 2px 29px 0 rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,119 @@
+#!/bin/bash
+PATH=./node_modules/.bin:$PATH
+
+###############################################################################
+# ACTIONS
+
+function init {
+  if [ -x $(which sudo) ]
+  then sudo npm i -g parcel-bundler
+  else npm i -g parcel-bundler
+  fi
+}
+
+function build {
+  echo "Recompiling the contracts"
+  cd ../blockchain
+  ./taskfile build > /dev/null
+  cd ../web
+
+  echo "Cleaning the build folder"
+  rm ./build/*
+
+  echo "Bundling the web site"
+  NODE_ENV=production parcel build -d ./build --log-level 2 --no-source-maps --public-url ./ src/index.html
+}
+
+function www {
+  build
+
+  serve build -p 1234
+}
+
+function dev {
+  if [ "$1" == "ropsten" ];
+  then
+    echo "Running on the ropsten blockchain"
+    NODE_ENV=development parcel -d ./build src/index.html
+  else
+    echo "Starting ganache"
+    ganache-cli --mnemonic "$(cat ./dev/mnemonic.txt)" > /dev/null &
+    ganache_pid=$!
+
+    # Uncomment below to recompile the contracts
+
+    # echo "Recompiling the contracts"
+    # cd ../blockchain
+    # ./taskfile build > /dev/null
+    # cd ../web
+
+    echo "Deploying to ganache"
+    sleep 2
+    node ./dev/local-deploy.js
+    echo
+
+    echo "Opening a dev browser"
+    node ./dev/open-browser.js &
+    browser_pid=$!
+
+    # parcel watch
+    NODE_ENV=test parcel -d ./build src/index.html
+
+    wait
+
+    echo "Stopping the servers"
+    kill $ganache_pid
+    kill $browser_pid
+  fi
+}
+
+function test {
+  echo "Starting ganache"
+  ganache-cli --mnemonic "$(cat ./dev/mnemonic.txt)" > /dev/null &
+  ganache_pid=$!
+
+  # Uncomment below to recompile the contracts
+
+  # echo "Recompiling the contracts"
+  # cd ../blockchain
+  # ./taskfile build > /dev/null
+  # cd ../web
+
+  echo "Deploying to ganache"
+  sleep 2
+  node ./dev/local-deploy.js
+  echo
+
+  echo "Bundling the web with NODE_ENV=test"
+  NODE_ENV=test parcel build -d ./build --log-level 2 --no-source-maps src/index.html &
+  parcel_pid=$!
+  
+  echo "Starting local web server"
+  serve build -p 1234 > /dev/null &
+  serve_pid=$!
+
+  echo "Running the tests"
+  wait $parcel_pid
+  mocha ./test/frontend.spec.js
+  mocha_result=$?
+  sleep 1
+
+  echo "Stopping the servers"
+  kill $ganache_pid
+  kill $serve_pid
+  exit $mocha_result
+}
+
+###############################################################################
+# DEFAULT => INFO
+
+function default {
+  echo "$0 <task> <args>"
+  echo
+  echo "Available tasks:"
+  compgen -A function | cat -n
+}
+
+
+TIMEFORMAT="Task completed in %3lR"
+time ${@:-default}

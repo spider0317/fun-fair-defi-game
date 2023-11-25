@@ -1,0 +1,36 @@
+{
+  "name": "fun-fair-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thesachinmittal/fun-fair-client.git"
+  },
+  "keywords": [],
+  "author": "Sachin Mittal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thesachinmittal/fun-fair-client/issues"
+  },
+  "homepage": "https://github.com/thesachinmittal/fun-fair-client#readme",
+  "dependencies": {
+    "antd": "^3.20.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-media": "^1.9.2",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.2",
+    "truffle": "^5.0.28",
+    "web3": "^1.2.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10"
+  }
+}

@@ -1,0 +1,70 @@
+/* MAIN VIEW */
+
+#main .open-game-row {
+    margin-bottom: 15px;
+}
+
+#main .open-game-row img {
+    max-height: 23px;
+}
+
+/* GAME VIEW */
+
+#game table#board {
+    width: 100%;
+}
+
+#game tbody {
+    width: 100%;
+}
+
+#game tr.line {
+    height: 3px;
+    background-color: #A8BAD9;
+}
+
+#game td:not(.line) {
+    padding: 25px;
+}
+
+#game td.line {
+    width: 3px;
+    background-color: #A8BAD9;
+}
+
+#game td:hover {
+    background-color: #A8BAD966;
+    cursor: pointer;
+}
+
+#game td .cell {
+    width: 100%;
+    min-height: 80px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    #game td .cell {
+        min-height: 60px;
+    }
+}
+
+@media (min-width: 992px) {
+    #game td .cell {
+        min-height: 80px;
+    }
+}
+
+#game td .cell.cell-o {
+    background-image: url(../media/cell-oval.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#game td .cell.cell-x {
+    background-image: url(../media/cell-cross.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}

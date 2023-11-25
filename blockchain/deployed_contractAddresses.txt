@@ -1,0 +1,2 @@
+Contract Address StringSupport - 0x40cfcA21137b007F8ef82B4aac1730bee0600D35
+Contract Address GamesOnStakes - 0x2C4ae5eEC9caD59e2cfd089dA3ABA9f33a51279b
